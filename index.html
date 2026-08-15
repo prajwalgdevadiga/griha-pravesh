@@ -1,4 +1,9 @@
-<title>Vijayalakshmi &amp; Shrinidhi's Griha Pravesh</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vijayalakshmi &amp; Srinidhi's Griha Pravesh</title>
 <style>
   @font-face{
     font-family:'Cinzel Inv';
@@ -264,14 +269,34 @@
     cursor:pointer;
   }
   .door-hint{
-    position:absolute; bottom:16%; left:50%; transform:translateX(-50%);
+    position:absolute; bottom:15%; left:50%; transform:translateX(-50%);
     z-index:31; color:var(--gold-bright); opacity:0;
-    animation:hintFade 1s ease 1.7s forwards;
+    animation:hintPulse 2.2s ease 0.6s infinite;
     pointer-events:none;
-    font-family:'Cinzel Inv', serif; font-size:0.62rem; letter-spacing:0.22em; text-transform:uppercase;
-    text-shadow:0 2px 10px rgba(0,0,0,0.55);
+    font-family:'Cinzel Inv', serif; font-size:0.85rem; letter-spacing:0.24em; text-transform:uppercase;
+    text-shadow:0 2px 10px rgba(0,0,0,0.6);
+    white-space:nowrap;
   }
-  @keyframes hintFade{ to{ opacity:0.9; } }
+  @keyframes hintPulse{
+    0%,100%{ opacity:0.5; transform:translateX(-50%) scale(1); }
+    50%{ opacity:1; transform:translateX(-50%) scale(1.06); }
+  }
+  .tap-ripple{
+    position:absolute; top:50%; left:50%;
+    width:64px; height:64px;
+    margin:-32px 0 0 -32px;
+    border-radius:50%;
+    border:1.5px solid var(--gold-bright);
+    z-index:31;
+    pointer-events:none;
+    opacity:0;
+    animation:tapRipple 2.4s ease-out 0.6s infinite;
+  }
+  .tap-ripple.ring2{ animation-delay:1.8s; }
+  @keyframes tapRipple{
+    0%{ transform:scale(0.7); opacity:0.9; }
+    100%{ transform:scale(2.8); opacity:0; }
+  }
   .door{
     width:50%; height:100%;
     background:
@@ -279,10 +304,10 @@
       linear-gradient(160deg, #6b4321, #4a2c15 55%, #3a2110);
     position:relative;
     box-shadow: inset 0 0 60px rgba(0,0,0,0.45);
-    animation-duration:1.7s;
+    animation-duration:2.2s;
     animation-timing-function:cubic-bezier(.7,0,.2,1);
     animation-fill-mode:forwards;
-    animation-delay:0.5s;
+    animation-delay:6.5s;
   }
   .door.l{
     border-right:2px solid var(--gold-deep);
@@ -322,7 +347,7 @@
   @keyframes doorsGone{
     to{ visibility:hidden; }
   }
-  .doorwrap{ animation:doorsGone 0s linear 2.3s forwards; }
+  .doorwrap{ animation:doorsGone 0s linear 8.8s forwards; }
   .door.skip{
     animation:none !important;
     transition:transform .6s cubic-bezier(.7,0,.2,1);
@@ -334,7 +359,7 @@
     background:radial-gradient(circle at 50% 45%, rgba(231,182,91,0.9), rgba(231,182,91,0) 45%);
     opacity:0;
     animation:flareGo 1.7s ease-out forwards;
-    animation-delay:1.1s;
+    animation-delay:7.3s;
     pointer-events:none;
   }
   @keyframes flareGo{
@@ -392,14 +417,17 @@
     display:flex; flex-direction:column; align-items:center; gap:8px;
     color:var(--label-gold);
   }
-  .scrollcue .stick{
-    width:1px; height:34px;
-    background:linear-gradient(var(--gold), transparent);
-    animation:stick 1.8s ease-in-out infinite;
+  .scrollcue .chevrons{
+    display:flex; flex-direction:column; align-items:center; gap:2px;
   }
-  @keyframes stick{
-    0%,100%{ transform:scaleY(1); opacity:0.7; }
-    50%{ transform:scaleY(0.5); opacity:1; }
+  .scrollcue .chevrons svg{
+    width:20px; height:20px;
+    animation:chevronBounce 1.6s ease-in-out infinite;
+  }
+  .scrollcue .chevrons svg:nth-child(2){ animation-delay:0.2s; opacity:0.5; }
+  @keyframes chevronBounce{
+    0%,100%{ transform:translateY(0); opacity:1; }
+    50%{ transform:translateY(7px); opacity:0.5; }
   }
 
   /* ================= INVITE ================= */
@@ -597,7 +625,7 @@
     color:var(--maroon-ink);
   }
   #tribute .label{ color:var(--gold-bright); }
-  .photo-frame-wrap{ position:relative; width:min(360px, 90%); margin:1.6rem auto 1.8rem; }
+  .photo-frame-wrap{ position:relative; width:min(460px, 96%); margin:1.6rem auto 1.8rem; }
   .photo-frame{
     aspect-ratio:1393/1129;
     border-radius:16px;
@@ -730,8 +758,12 @@
     .reveal{ opacity:1; transform:none; transition:none; }
     .vine{ transition:none !important; transform:scaleY(1) !important; }
     .door-hint{ animation:none !important; opacity:0.9; }
+    .scrollcue .chevrons svg{ animation:none !important; }
   }
 </style>
+</head>
+<body>
+
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -816,15 +848,20 @@
     <p class="label griha">Griha Pravesh</p>
     <p class="hero-sub">A new home, a new beginning &mdash; and it will only feel whole with you there.</p>
     <div class="scrollcue" aria-hidden="true">
-      <span class="label">Begin</span>
-      <span class="stick"></span>
+      <span class="label">Scroll Down</span>
+      <span class="chevrons">
+        <svg viewBox="0 0 24 24"><path d="M4 8 L12 16 L20 8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M4 8 L12 16 L20 8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
     </div>
   </div>
 
   <div class="doorwrap" id="doorwrap" aria-hidden="true">
     <div class="door l"><svg class="emblem" viewBox="0 0 100 100"><use href="#i-ganesha"/></svg></div>
     <div class="door r"><svg class="emblem" viewBox="0 0 100 100"><use href="#i-ganesha"/></svg></div>
-    <span class="door-hint">Tap to Open</span>
+    <span class="tap-ripple"></span>
+    <span class="tap-ripple ring2"></span>
+    <span class="door-hint">Tap to Enter</span>
   </div>
   <div class="flare" id="flare" aria-hidden="true"></div>
 </section>
@@ -840,7 +877,7 @@
     </p>
     <div class="signature reveal reveal-d2">
       <span class="label">Warm Regards</span>
-      <span class="who script">Shrimati. Vijayalakshmi and Shrinidhi</span>
+      <span class="who script">Shrimati. Vijayalakshmi and Srinidhi</span>
     </div>
   </div>
 </section>
@@ -1006,7 +1043,7 @@
     <p class="body-copy reveal">Your presence and blessings will make this new beginning truly complete.</p>
     <div class="signature reveal reveal-d1">
       <span class="farewell">Warm Regards</span>
-      <span class="who display">Shrimati. Vijayalakshmi and Shrinidhi</span>
+      <span class="who display">Shrimati. Vijayalakshmi and Srinidhi</span>
     </div>
     <p class="recap reveal reveal-d2">30 August 2026 &middot; 5:00 AM &middot; Navami Landmark, Rajarajeshwari Nagar</p>
   </div>
@@ -1043,7 +1080,7 @@
   var calBtn = document.getElementById('calendar-btn');
   if (calBtn) {
     calBtn.href = "https://calendar.google.com/calendar/render?action=TEMPLATE"
-      + "&text=" + encodeURIComponent("Griha Pravesh \u2014 Vijayalakshmi & Shrinidhi")
+      + "&text=" + encodeURIComponent("Griha Pravesh \u2014 Vijayalakshmi & Srinidhi")
       + "&dates=20260829T233000Z/20260830T023000Z"
       + "&details=" + encodeURIComponent("Housewarming ceremony. We can't wait to welcome you!")
       + "&location=" + encodeURIComponent(addr);
@@ -1320,7 +1357,7 @@
           access_key: WEB3FORMS_KEY,
           name: name || 'A Well-Wisher',
           message: msg,
-          subject: 'A new blessing for Vijayalakshmi & Shrinidhi\u2019s new home'
+          subject: 'A new blessing for Vijayalakshmi & Srinidhi\u2019s new home'
         })
       })
         .then(function(res){ return res.json(); })
@@ -1372,3 +1409,6 @@
   }, 2400);
 })();
 </script>
+
+</body>
+</html>
